@@ -1,0 +1,23 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
+  "password": "root",
+  "database": "node",
+  "synchronize": true,
+  "entities": [
+    "./entity/*.{js,ts}"
+  ],
+  "subscribers": [
+    "./subscriber/*.{js,ts}"
+  ],
+  "migrations": [
+    "./migration/*.{js,ts}"
+  ],
+  "cli": {
+    "entitiesDir": "./entity",
+    "migrationsDir": "./migration",
+    "subscribersDir": "./subscriber"
+  }
+}
