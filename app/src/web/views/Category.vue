@@ -31,23 +31,17 @@
   <div class="container mt-2">
     <div class="row">
       <div class="col-lg-3 col-12">
-        <h3>Фильтр</h3>
-
         <div class="filter d-flex flex-column">
-          <div class="filter__list" v-for="filter in $store.state.filter">
+          <div class="filter__list" v-for="(filter, id) in $store.state.filter">
             <div class="filter__title mb-1">{{ filter.title }}</div>
 
-            <div class="filter__values">
-              <div v-if="filter.type === 'select'" class="d-flex align-items-center" v-for="(item, key) in filter.values">
-                <input class="w-auto" type="checkbox" :id="`${filter.title}-${key}`">
-                <label class="mb-0 ms-2" :for="`${filter.title}-${key}`">{{ item }}</label>
-              </div>
-
-              <InputSlider v-else-if="filter.type === 'slider'" title="Цена" :value="filter.values" />
+            <div class="filter__values d-flex flex-column gap-5">
+              <Checkbox v-if="filter.type === 'select'" v-for="(title, key) in filter.values" :title="title" />
+              <InputSlider v-else-if="filter.type === 'slider'" title="Цена" :value="filter.values" :step="5" />
             </div>
-
-
           </div>
+
+          <input class="btn btn-primary mt-2" type="submit" value="Применить">
 
         </div>
 
@@ -62,10 +56,12 @@
 <script>
 import Products from "@/web/views/Components/Products";
 import InputSlider from "@/web/components/Entity/InputSlider";
+import Checkbox from "@/web/components/Entity/Checkbox";
 
 export default {
   name: "Category",
   components: {
+    Checkbox,
     InputSlider,
     Products,
   },
@@ -97,6 +93,14 @@ export default {
 
   &__list {
 
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  &__values {
   }
 }
 </style>

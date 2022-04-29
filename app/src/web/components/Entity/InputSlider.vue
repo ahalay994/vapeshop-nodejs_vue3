@@ -1,12 +1,8 @@
 <template>
-  <div class="d-flex">
-    <input type="text" v-model="valueModel[0]">
-    <input type="text" v-model="valueModel[1]">
-  </div>
-
+  <b class="d-block text-end mb-1">{{ valueModel[0] }} - {{ valueModel[1] }} BYN</b>
   <Slider
-      id="i1"
-      :step="5"
+      :id="id"
+      :step="step"
       :min="value[0]"
       :max="value[1]"
       show-tooltip="drag"
@@ -25,6 +21,12 @@ export default {
     Slider,
   },
   props: {
+    id: {
+      type: String,
+      default() {
+        return '';
+      }
+    },
     title: {
       type: String,
       default() {
@@ -36,6 +38,12 @@ export default {
       default() {
         return [];
       }
+    },
+    step: {
+      type: Number,
+      default() {
+        return 0.1;
+      }
     }
   },
   data() {
@@ -43,11 +51,34 @@ export default {
       valueModel: this.value,
 
     }
-  }
+  },
 }
 </script>
 
 <style lang="scss">
 @import "@vueform/slider/themes/default";
+@import "../../styles/variables";
+
+.slider {
+  &__input {
+    width: 60px;
+    padding: 5px 10px;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  &-connect {
+    background-color: $primary-color;
+  }
+
+  &-tooltip {
+    border: 1px solid $primary-color;
+    background-color: $primary-color;
+  }
+}
 
 </style>
